@@ -7,6 +7,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Message {
+  id        String   @id @default(cuid())
+  userId    String
+  message   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
 model Account {
   id                 String    @id @default(cuid())
   userId             String
@@ -44,6 +52,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  Message       Message[]
 }
 
 model VerificationRequest {
