@@ -9,6 +9,9 @@ const handler = nc<NextApiRequest, NextApiResponse>()
     const messages = await prisma.message.findMany({
       orderBy: {
         createdAt: 'desc'
+      },
+      include: {
+        user: true
       }
     })
 
