@@ -7,9 +7,9 @@ export const Wrapper = styled.div`
 export const Content = styled.div``
 
 export const Profile = styled.footer`
-  ${tw`flex items-center mt-3 text-xs text-neutral-500`}
+  ${tw`flex items-center h-6 mt-3 text-xs text-neutral-500`}
 
-  div {
-    ${tw`mr-2`}
+  span {
+    ${tw`ml-2`}
   }
 `
