@@ -52,7 +52,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-  Message       Message[]
+  messages      Message[]
 }
 
 model VerificationRequest {

@@ -9,7 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "clean": "rm -rf node_modules .next"
+    "clean": "rm -rf node_modules .next",
+    "ts-node": "ts-node --compiler-options {\\\"module\\\":\\\"commonjs\\\"}",
+    "prisma:push": "prisma db push",
+    "prisma:seed": "prisma db seed --preview-feature"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.5.4",
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.4",
+    "@types/faker": "^5.5.8",
     "@types/node": "^16.7.10",
     "@types/react": "17.0.19",
     "@types/styled-components": "^5.1.13",
@@ -40,6 +44,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "faker": "^5.5.3",
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "prisma": "^2.30.3",
