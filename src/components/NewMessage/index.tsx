@@ -9,7 +9,7 @@ import { Footer, Heading, Wrapper } from './styles'
 
 export function NewMessage() {
   const [session] = useSession()
-  const { message, setMessage, handleNewMessage } = useMessage()
+  const { message, setMessage, handleNewMessage, isLoading } = useMessage()
 
   return (
     <Wrapper>
@@ -19,7 +19,11 @@ export function NewMessage() {
 
       <Footer>
         <SignInButton />
-        <Button disabled={!session} onClick={handleNewMessage}>
+        <Button
+          disabled={!session || message.trim() === ''}
+          isLoading={isLoading}
+          onClick={handleNewMessage}
+        >
           Send
         </Button>
       </Footer>

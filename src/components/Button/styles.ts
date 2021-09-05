@@ -1,9 +1,18 @@
+import { CgSpinner } from 'react-icons/cg'
 import tw, { styled } from 'twin.macro'
 
-export const Button = styled.button`
-  ${tw`px-4 py-2 text-sm font-medium transition-colors duration-200 rounded bg-primary-500 text-neutral-50
+import { ButtonProps } from '.'
+
+export const Wrapper = styled.button<ButtonProps>(({ isLoading = false }) => [
+  tw`flex justify-center items-center w-16 h-8 text-sm font-medium transition-colors duration-200 rounded bg-primary-500 text-neutral-50
 
   hover:bg-primary-600
 
-  disabled:(opacity-60 cursor-default hover:bg-primary-500)`}
+  disabled:(cursor-default hover:bg-primary-500)`,
+
+  isLoading && tw`cursor-default hover:bg-primary-500`
+])
+
+export const Spinner = styled(CgSpinner)`
+  ${tw`animate-spin`}
 `

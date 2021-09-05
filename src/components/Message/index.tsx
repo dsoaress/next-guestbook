@@ -1,6 +1,8 @@
 import { Message as MessageType, User } from '@prisma/client'
 import Avatar from 'react-avatar'
 
+import { formatDate } from '@/utils/formatDate'
+
 import { Content, Profile, Wrapper } from './styles'
 
 type MessageProps = {
@@ -14,7 +16,7 @@ export function Message({ message }: MessageProps) {
 
       <Profile>
         <Avatar src={message.user.image ?? undefined} round size="24px" />
-        {message.user.name}
+        {message.user.name} • {formatDate(message.createdAt)}
       </Profile>
     </Wrapper>
   )
