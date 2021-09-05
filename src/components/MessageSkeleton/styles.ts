@@ -25,5 +25,5 @@ export const Profile = styled.footer`
 `
 
 export const Avatar = styled.div`
-  ${tw`w-6 h-6 mr-2 rounded-full  bg-neutral-800`}
+  ${tw`w-6 h-6 mr-2 rounded-full bg-neutral-800`}
 `

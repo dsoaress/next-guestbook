@@ -1,19 +1,29 @@
+import { Message, User } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 import nc from 'next-connect'
 
 import { prisma } from '@/services/prisma'
+import { invalidadeCache, recoverCache, saveCache } from '@/services/redis'
+
+type Messages = (Message & { user: User })[]
 
 const handler = nc<NextApiRequest, NextApiResponse>()
   .get(async (_req, res) => {
-    const messages = await prisma.message.findMany({
-      orderBy: {
-        createdAt: 'desc'
-      },
-      include: {
-        user: true
-      }
-    })
+    let messages = await recoverCache<Messages>('MESSAGES')
+
+    if (!messages) {
+      messages = await prisma.message.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          user: true
+        }
+      })
+
+      await saveCache('MESSAGES', messages)
+    }
 
     res.status(200).json(messages)
   })
@@ -38,6 +48,8 @@ const handler = nc<NextApiRequest, NextApiResponse>()
         }
       }
     })
+
+    await invalidadeCache('MESSAGES')
 
     res.status(201).json(newMessage)
   })
