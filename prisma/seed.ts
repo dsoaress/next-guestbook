@@ -18,7 +18,7 @@ async function main() {
       data: {
         name,
         email,
-        // image,
+        image,
         messages: {
           create: [
             {
