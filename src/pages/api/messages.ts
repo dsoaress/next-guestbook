@@ -1,4 +1,5 @@
 import { Message, User } from '@prisma/client'
+import Filter from 'bad-words'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 import nc from 'next-connect'
@@ -7,6 +8,8 @@ import { prisma } from '@/services/prisma'
 import { invalidadeCache, recoverCache, saveCache } from '@/services/redis'
 
 type Messages = (Message & { user: User })[]
+
+const filter = new Filter()
 
 const handler = nc<NextApiRequest, NextApiResponse>()
   .get(async (_req, res) => {
@@ -40,7 +43,7 @@ const handler = nc<NextApiRequest, NextApiResponse>()
 
     const newMessage = await prisma.message.create({
       data: {
-        message,
+        message: filter.clean(message),
         user: {
           connect: {
             id: userId
